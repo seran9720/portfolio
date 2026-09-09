@@ -1,0 +1,3047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SERAN | Spider Portfolio</title>
+
+<style>
+
+/* =========================
+   BASIC RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#020204;
+    color:white;
+    overflow:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* =========================
+   INTRO SCREEN
+========================= */
+
+#entry{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,0,40,.16),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at center,
+            rgba(0,80,255,.10),
+            transparent 60%
+        ),
+        #020204;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease,
+        transform 1s ease;
+}
+
+#entry.hide{
+    opacity:0;
+    visibility:hidden;
+    transform:scale(1.08);
+    pointer-events:none;
+}
+
+
+/* =========================
+   SPIDER WEB
+========================= */
+
+.spider-web{
+    position:absolute;
+
+    width:750px;
+    height:750px;
+
+    border-radius:50%;
+
+    background:
+        repeating-radial-gradient(
+            circle,
+            transparent 0,
+            transparent 38px,
+            rgba(255,255,255,.06) 40px,
+            transparent 42px
+        );
+
+    mask-image:
+        radial-gradient(
+            circle,
+            black 10%,
+            transparent 73%
+        );
+
+    animation:webRotate 35s linear infinite;
+}
+
+.spider-web::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    border-radius:50%;
+
+    background:
+        repeating-conic-gradient(
+            from 0deg,
+            rgba(255,255,255,.07) 0deg,
+            rgba(255,255,255,.07) 1deg,
+            transparent 1deg,
+            transparent 30deg
+        );
+}
+
+@keyframes webRotate{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.entry-grid{
+    position:absolute;
+    inset:-100px;
+
+    background-image:
+        linear-gradient(
+            rgba(255,0,40,.03) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,100,255,.03) 1px,
+            transparent 1px
+        );
+
+    background-size:55px 55px;
+
+    mask-image:
+        radial-gradient(
+            circle,
+            black 10%,
+            transparent 70%
+        );
+
+    animation:gridMove 12s linear infinite;
+}
+
+@keyframes gridMove{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(55px);
+    }
+}
+
+
+/* =========================
+   CENTER GLOW
+========================= */
+
+.entry-glow{
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,0,40,.23),
+            rgba(0,80,255,.08) 40%,
+            transparent 70%
+        );
+
+    filter:blur(25px);
+
+    animation:glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse{
+
+    0%,100%{
+        transform:scale(.85);
+        opacity:.5;
+    }
+
+    50%{
+        transform:scale(1.15);
+        opacity:1;
+    }
+}
+
+
+/* =========================
+   ORBITS
+========================= */
+
+.orbit{
+    position:absolute;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.orbit.one{
+    width:440px;
+    height:440px;
+
+    border-color:rgba(0,120,255,.18);
+
+    animation:orbitOne 14s linear infinite;
+}
+
+.orbit.two{
+    width:650px;
+    height:650px;
+
+    border-color:rgba(255,0,45,.14);
+
+    animation:orbitTwo 23s linear infinite;
+}
+
+.orbit.three{
+    width:850px;
+    height:850px;
+
+    border-color:rgba(255,255,255,.04);
+
+    animation:orbitOne 35s linear infinite;
+}
+
+@keyframes orbitOne{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes orbitTwo{
+
+    from{
+        transform:rotate(360deg);
+    }
+
+    to{
+        transform:rotate(0deg);
+    }
+}
+
+
+/* =========================
+   INTRO CONTENT
+========================= */
+
+.entry-content{
+    position:relative;
+    z-index:20;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    text-align:center;
+}
+
+.entry-label{
+
+    font-size:10px;
+
+    letter-spacing:7px;
+
+    color:rgba(255,255,255,.45);
+
+    margin-bottom:25px;
+
+    animation:
+        labelReveal 1.2s ease .2s both;
+}
+
+@keyframes labelReveal{
+
+    from{
+        opacity:0;
+        letter-spacing:18px;
+    }
+
+    to{
+        opacity:1;
+        letter-spacing:7px;
+    }
+}
+
+
+/* =========================
+   SERAN INTRO TEXT
+========================= */
+
+.entry-name{
+
+    display:flex;
+
+    font-size:clamp(
+        80px,
+        15vw,
+        190px
+    );
+
+    font-weight:900;
+
+    letter-spacing:
+        clamp(
+            7px,
+            2vw,
+            22px
+        );
+
+    line-height:.85;
+}
+
+.entry-name span{
+
+    display:inline-block;
+
+    opacity:0;
+
+    transform:
+        translateY(120px)
+        rotateX(90deg);
+
+    animation:
+        spiderLetter
+        .85s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+.entry-name span:nth-child(1){
+    animation-delay:.3s;
+}
+
+.entry-name span:nth-child(2){
+    animation-delay:.4s;
+}
+
+.entry-name span:nth-child(3){
+    animation-delay:.5s;
+}
+
+.entry-name span:nth-child(4){
+    animation-delay:.6s;
+}
+
+.entry-name span:nth-child(5){
+    animation-delay:.7s;
+}
+
+@keyframes spiderLetter{
+
+    to{
+        opacity:1;
+
+        transform:
+            translateY(0)
+            rotateX(0);
+    }
+}
+
+
+/* RED + BLUE GLOW */
+
+.entry-name span:nth-child(odd){
+
+    text-shadow:
+        0 0 10px #ff174f,
+        0 0 30px rgba(255,0,45,.65),
+        0 0 70px rgba(255,0,45,.25);
+}
+
+.entry-name span:nth-child(even){
+
+    text-shadow:
+        0 0 10px #087cff,
+        0 0 30px rgba(0,110,255,.65),
+        0 0 70px rgba(0,100,255,.25);
+}
+
+
+/* =========================
+   INTRO LINE
+========================= */
+
+.entry-line{
+
+    width:0;
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff174f,
+            white,
+            #006eff,
+            transparent
+        );
+
+    animation:
+        lineOpen 1.3s ease 1s forwards;
+}
+
+@keyframes lineOpen{
+
+    to{
+        width:min(430px,72vw);
+    }
+}
+
+
+.entry-role{
+
+    margin-top:22px;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+
+    color:rgba(255,255,255,.4);
+
+    opacity:0;
+
+    animation:
+        fadeUp 1s ease 1.25s forwards;
+}
+
+
+/* =========================
+   ENTER PORTFOLIO BUTTON
+   RED + BLACK
+========================= */
+
+.enter-btn{
+
+    position:relative;
+
+    margin-top:42px;
+
+    padding:17px 38px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #050000,
+            #210005
+        );
+
+    color:white;
+
+    border:1px solid #ff174f;
+
+    cursor:pointer;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+
+    overflow:hidden;
+
+    opacity:0;
+
+    animation:
+        fadeUp 1s ease 1.5s forwards;
+
+    transition:.4s;
+
+    box-shadow:
+        0 0 12px rgba(255,0,50,.3),
+        inset 0 0 18px rgba(255,0,50,.08);
+}
+
+.enter-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:80%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.4),
+            transparent
+        );
+
+    transform:skewX(-25deg);
+
+    transition:.7s;
+}
+
+.enter-btn:hover::before{
+    left:140%;
+}
+
+.enter-btn:hover{
+
+    background:
+        linear-gradient(
+            135deg,
+            #350006,
+            #030000
+        );
+
+    border-color:#ff174f;
+
+    transform:
+        translateY(-4px)
+        scale(1.04);
+
+    box-shadow:
+        0 0 15px #ff174f,
+        0 0 40px rgba(255,0,50,.45),
+        inset 0 0 25px rgba(255,0,50,.15);
+}
+
+.enter-btn i{
+
+    font-style:normal;
+
+    color:#ff174f;
+
+    margin-left:14px;
+
+    transition:.3s;
+}
+
+.enter-btn:hover i{
+
+    transform:translateX(7px);
+
+    color:white;
+}
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+.web-particle{
+
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:0 0 8px white;
+
+    animation:
+        particleMove
+        5s ease-in-out infinite;
+}
+
+.web-particle:nth-child(1){
+    left:10%;
+    top:20%;
+}
+
+.web-particle:nth-child(2){
+    left:85%;
+    top:15%;
+    animation-delay:1s;
+}
+
+.web-particle:nth-child(3){
+    left:18%;
+    top:78%;
+    animation-delay:2s;
+}
+
+.web-particle:nth-child(4){
+    left:90%;
+    top:72%;
+    animation-delay:3s;
+}
+
+.web-particle:nth-child(5){
+    left:50%;
+    top:10%;
+    animation-delay:1.5s;
+}
+
+.web-particle:nth-child(6){
+    left:70%;
+    top:85%;
+    animation-delay:2.5s;
+}
+
+@keyframes particleMove{
+
+    0%,100%{
+        transform:translateY(0);
+        opacity:.15;
+    }
+
+    50%{
+        transform:translateY(-25px);
+        opacity:.8;
+    }
+}
+
+
+/* =========================
+   CORNER DESIGN
+========================= */
+
+.corner{
+
+    position:absolute;
+
+    width:38px;
+    height:38px;
+
+    opacity:.4;
+}
+
+.corner.tl{
+
+    top:30px;
+    left:30px;
+
+    border-top:1px solid #ff174f;
+    border-left:1px solid #ff174f;
+}
+
+.corner.tr{
+
+    top:30px;
+    right:30px;
+
+    border-top:1px solid #006eff;
+    border-right:1px solid #006eff;
+}
+
+.corner.bl{
+
+    bottom:30px;
+    left:30px;
+
+    border-bottom:1px solid #006eff;
+    border-left:1px solid #006eff;
+}
+
+.corner.br{
+
+    bottom:30px;
+    right:30px;
+
+    border-bottom:1px solid #ff174f;
+    border-right:1px solid #ff174f;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+
+    z-index:1000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:20px 7%;
+
+    background:
+        rgba(2,2,4,.88);
+
+    backdrop-filter:blur(15px);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.05);
+}
+
+.logo{
+
+    font-size:22px;
+
+    font-weight:900;
+
+    letter-spacing:4px;
+}
+
+.logo span{
+    color:#ff174f;
+}
+
+.nav-links{
+
+    display:flex;
+
+    gap:30px;
+
+    list-style:none;
+}
+
+.nav-links a{
+
+    position:relative;
+
+    font-size:11px;
+
+    color:#888;
+
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-links a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-8px;
+
+    width:0;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff174f,
+            #006eff
+        );
+
+    transition:.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+.nav-btn{
+
+    padding:10px 18px;
+
+    font-size:10px;
+
+    border:
+        1px solid
+        rgba(255,23,79,.6);
+
+    transition:.3s;
+}
+
+.nav-btn:hover{
+
+    background:#ff174f;
+
+    box-shadow:
+        0 0 20px
+        rgba(255,0,50,.3);
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+    min-height:100vh;
+
+    padding:
+        150px 7% 80px;
+
+    display:grid;
+
+    grid-template-columns:
+        1.1fr .9fr;
+
+    align-items:center;
+
+    gap:60px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:600px;
+    height:600px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,0,45,.11),
+            transparent 70%
+        );
+
+    top:10%;
+    left:20%;
+
+    filter:blur(25px);
+}
+
+.hero-content{
+
+    position:relative;
+
+    z-index:2;
+}
+
+.hero-small{
+
+    color:#ff174f;
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    margin-bottom:20px;
+}
+
+.hero h1{
+
+    font-size:
+        clamp(
+            55px,
+            7vw,
+            95px
+        );
+
+    line-height:.95;
+
+    margin-bottom:22px;
+}
+
+.hero h1 span{
+    color:#ff174f;
+}
+
+.typing{
+
+    min-height:30px;
+
+    font-size:21px;
+
+    color:#aaa;
+
+    margin-bottom:20px;
+}
+
+.hero p{
+
+    max-width:650px;
+
+    color:#777;
+
+    font-size:14px;
+
+    line-height:1.8;
+
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+}
+
+.primary-btn{
+
+    padding:14px 25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #b8002d,
+            #ff174f
+        );
+
+    font-size:10px;
+
+    letter-spacing:1px;
+
+    border:1px solid #ff174f;
+
+    transition:.3s;
+}
+
+.primary-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 10px 35px
+        rgba(255,0,50,.3);
+}
+
+.secondary-btn{
+
+    padding:14px 25px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    font-size:10px;
+
+    color:#aaa;
+
+    transition:.3s;
+}
+
+.secondary-btn:hover{
+
+    color:white;
+
+    border-color:#006eff;
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile-area{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+
+/*
+   IMPORTANT:
+   OUTER RING ROTATES
+   PHOTO WILL NOT ROTATE
+*/
+
+.profile-ring{
+
+    width:360px;
+    height:360px;
+
+    border-radius:50%;
+
+    padding:5px;
+
+    background:
+        conic-gradient(
+            #ff174f,
+            #006eff,
+            #ff174f,
+            transparent,
+            #006eff,
+            #ff174f
+        );
+
+    animation:
+        profileRotate
+        8s
+        linear
+        infinite;
+
+    box-shadow:
+        0 0 40px
+        rgba(255,0,50,.12),
+
+        0 0 40px
+        rgba(0,100,255,.12);
+}
+
+@keyframes profileRotate{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+/*
+   COUNTER ROTATION
+   Keeps image upright
+*/
+
+.profile-inner{
+
+    width:100%;
+    height:100%;
+
+    border-radius:50%;
+
+    padding:8px;
+
+    background:#030304;
+
+    overflow:hidden;
+
+    animation:
+        counterRotate
+        8s
+        linear
+        infinite;
+}
+
+@keyframes counterRotate{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(-360deg);
+    }
+}
+
+
+/* PROFILE IMAGE */
+
+.profile-inner img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    display:block;
+}
+
+
+/* =========================
+   FLOATING CARDS
+========================= */
+
+.float-card{
+
+    position:absolute;
+
+    padding:15px 20px;
+
+    background:
+        rgba(8,5,8,.94);
+
+    backdrop-filter:blur(15px);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    animation:
+        cardFloat
+        4s
+        ease-in-out
+        infinite;
+}
+
+.float-card strong{
+
+    display:block;
+
+    font-size:22px;
+
+    color:#ff174f;
+}
+
+.float-card small{
+
+    color:#777;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+}
+
+.card-one{
+
+    left:0;
+
+    bottom:40px;
+}
+
+.card-two{
+
+    right:0;
+
+    top:40px;
+
+    animation-delay:1.5s;
+}
+
+@keyframes cardFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+
+    padding:110px 7%;
+
+    position:relative;
+}
+
+.section-title{
+
+    margin-bottom:55px;
+}
+
+.section-title small{
+
+    color:#ff174f;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+}
+
+.section-title h2{
+
+    font-size:
+        clamp(
+            35px,
+            5vw,
+            55px
+        );
+
+    margin-top:12px;
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:50px;
+}
+
+.about-text{
+
+    color:#888;
+
+    font-size:14px;
+
+    line-height:1.9;
+}
+
+.about-boxes{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:15px;
+}
+
+.info-box{
+
+    padding:25px;
+
+    background:
+        rgba(255,255,255,.02);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    transition:.35s;
+}
+
+.info-box:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#ff174f;
+
+    box-shadow:
+        0 15px 40px
+        rgba(255,0,50,.08);
+}
+
+.info-box h3{
+
+    color:#ff174f;
+
+    font-size:25px;
+
+    margin-bottom:8px;
+}
+
+.info-box p{
+
+    color:#777;
+
+    font-size:11px;
+}
+
+
+/* =========================
+   SKILLS
+========================= */
+
+.skills-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:20px;
+}
+
+.skill{
+
+    padding:25px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    background:
+        rgba(255,255,255,.02);
+}
+
+.skill-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:12px;
+
+    font-size:12px;
+}
+
+.skill-top span:last-child{
+    color:#ff174f;
+}
+
+.skill-bar{
+
+    height:5px;
+
+    background:#111;
+
+    overflow:hidden;
+}
+
+.skill-progress{
+
+    height:100%;
+
+    width:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff174f,
+            #006eff
+        );
+
+    transition:
+        width 1.4s ease;
+}
+
+
+/* =========================
+   TECH
+========================= */
+
+.tech-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+}
+
+.tech{
+
+    padding:30px 20px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    transition:.35s;
+}
+
+.tech:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#ff174f;
+
+    box-shadow:
+        0 15px 35px
+        rgba(255,0,50,.08);
+}
+
+.tech h3{
+
+    font-size:16px;
+
+    margin-bottom:8px;
+}
+
+.tech p{
+
+    color:#666;
+
+    font-size:10px;
+}
+
+
+/* =========================
+   PROJECTS
+========================= */
+
+.project-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.project{
+
+    position:relative;
+
+    min-height:230px;
+
+    padding:30px;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.01)
+        );
+
+    transition:.4s;
+}
+
+.project::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    top:-100px;
+    right:-100px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,20,60,.15),
+            transparent 70%
+        );
+}
+
+.project:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#ff174f;
+
+    box-shadow:
+        0 20px 50px
+        rgba(255,0,50,.1);
+}
+
+.project-number{
+
+    color:#ff174f;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    margin-bottom:30px;
+}
+
+.project h3{
+
+    font-size:20px;
+
+    margin-bottom:12px;
+}
+
+.project p{
+
+    color:#777;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   SERVICES
+========================= */
+
+.service-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.service{
+
+    padding:35px 25px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    transition:.35s;
+}
+
+.service:hover{
+
+    transform:translateY(-7px);
+
+    border-color:#006eff;
+}
+
+.service-icon{
+
+    font-size:30px;
+
+    color:#ff174f;
+
+    margin-bottom:20px;
+}
+
+.service h3{
+
+    margin-bottom:12px;
+}
+
+.service p{
+
+    color:#777;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   EDUCATION
+========================= */
+
+.education{
+
+    max-width:850px;
+
+    border-left:
+        1px solid
+        rgba(255,23,79,.5);
+
+    padding-left:30px;
+}
+
+.edu-item{
+
+    position:relative;
+
+    margin-bottom:35px;
+}
+
+.edu-item::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    background:#ff174f;
+
+    left:-35px;
+    top:5px;
+
+    box-shadow:
+        0 0 15px #ff174f;
+}
+
+.edu-year{
+
+    color:#006eff;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    margin-bottom:8px;
+}
+
+.edu-item h3{
+
+    margin-bottom:8px;
+}
+
+.edu-item p{
+
+    color:#777;
+
+    font-size:13px;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-box{
+
+    max-width:850px;
+
+    margin:auto;
+
+    padding:50px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        rgba(255,23,79,.2);
+
+    background:
+        rgba(255,255,255,.02);
+}
+
+.contact-box h2{
+
+    font-size:40px;
+
+    margin-bottom:15px;
+}
+
+.contact-box p{
+
+    color:#777;
+
+    margin-bottom:30px;
+}
+
+.contact-links{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+}
+
+.contact-links a{
+
+    padding:12px 20px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    color:#aaa;
+
+    font-size:10px;
+
+    transition:.3s;
+}
+
+.contact-links a:hover{
+
+    color:white;
+
+    border-color:#ff174f;
+
+    box-shadow:
+        0 0 15px
+        rgba(255,0,50,.15);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    padding:35px 7%;
+
+    text-align:center;
+
+    color:#555;
+
+    font-size:10px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.05);
+}
+
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+.reveal{
+
+    opacity:0;
+
+    transform:translateY(30px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.reveal.active{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .navbar{
+        padding:18px 5%;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+
+        padding-left:5%;
+        padding-right:5%;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+    }
+
+    .about-grid,
+    .skills-grid{
+        grid-template-columns:1fr;
+    }
+
+    .tech-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .project-grid,
+    .service-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+
+@media(max-width:600px){
+
+    .entry-name{
+
+        font-size:68px;
+
+        letter-spacing:7px;
+    }
+
+    .entry-label{
+
+        font-size:7px;
+
+        letter-spacing:4px;
+    }
+
+    .entry-role{
+
+        font-size:7px;
+
+        letter-spacing:2px;
+    }
+
+    .spider-web{
+
+        width:500px;
+        height:500px;
+    }
+
+    .orbit.one{
+
+        width:360px;
+        height:360px;
+    }
+
+    .orbit.two{
+
+        width:500px;
+        height:500px;
+    }
+
+    .orbit.three{
+
+        width:650px;
+        height:650px;
+    }
+
+    .profile-ring{
+
+        width:280px;
+        height:280px;
+    }
+
+    .float-card{
+
+        padding:10px 14px;
+    }
+
+    section{
+
+        padding:80px 5%;
+    }
+
+    .contact-box{
+
+        padding:30px 20px;
+    }
+
+    .contact-box h2{
+
+        font-size:30px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<div id="entry">
+
+    <div class="entry-glow"></div>
+
+    <div class="spider-web"></div>
+
+    <div class="entry-grid"></div>
+
+    <div class="orbit one"></div>
+    <div class="orbit two"></div>
+    <div class="orbit three"></div>
+
+
+    <div class="web-particle"></div>
+    <div class="web-particle"></div>
+    <div class="web-particle"></div>
+    <div class="web-particle"></div>
+    <div class="web-particle"></div>
+    <div class="web-particle"></div>
+
+
+    <div class="entry-content">
+
+        <div class="entry-label">
+            PERSONAL PORTFOLIO • 2026
+        </div>
+
+
+        <div class="entry-line"></div>
+
+
+        <h1 class="entry-name">
+
+            <span>S</span>
+            <span>E</span>
+            <span>R</span>
+            <span>A</span>
+            <span>N</span>
+
+        </h1>
+
+
+        <div class="entry-line"></div>
+
+
+        <p class="entry-role">
+            IT ENGINEERING • FULL STACK • DEVELOPMENT
+        </p>
+
+
+        <button
+            class="enter-btn"
+            onclick="enterSite()">
+
+            ENTER PORTFOLIO
+
+            <i>→</i>
+
+        </button>
+
+    </div>
+
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+</div>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <a href="#home" class="logo">
+        SER<span>A</span>N
+    </a>
+
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="#home">Home</a>
+        </li>
+
+        <li>
+            <a href="#about">About</a>
+        </li>
+
+        <li>
+            <a href="#skills">Skills</a>
+        </li>
+
+        <li>
+            <a href="#projects">Projects</a>
+        </li>
+
+        <li>
+            <a href="#education">Education</a>
+        </li>
+
+        <li>
+            <a href="#contact">Contact</a>
+        </li>
+
+    </ul>
+
+
+    <a
+        href="#contact"
+        class="nav-btn">
+
+        LET'S TALK
+
+    </a>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section
+    class="hero"
+    id="home">
+
+
+    <div class="hero-content reveal">
+
+        <div class="hero-small">
+            HELLO, I'M
+        </div>
+
+
+        <h1>
+            SERAN<span>.</span>
+        </h1>
+
+
+        <div
+            class="typing"
+            id="typing">
+        </div>
+
+
+        <p>
+
+            I am an IT engineering student passionate
+            about software development, modern web
+            technologies and building practical
+            digital solutions.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="#projects"
+                class="primary-btn">
+
+                VIEW MY WORK
+
+            </a>
+
+
+            <a
+                href="#contact"
+                class="secondary-btn">
+
+                CONTACT ME
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         PROFILE PHOTO
+         PHOTO ONLY HERE
+    ================================================= -->
+
+    <div class="profile-area reveal">
+
+
+        <div class="profile-ring">
+
+
+            <div class="profile-inner">
+
+                <!--
+                    Keep Aathi.jpg.jpeg
+                    in the same folder
+                    as this HTML file.
+                -->
+
+                <img
+                    src="Aathi.jpg.jpeg"
+                    alt="Seran Profile">
+
+            </div>
+
+        </div>
+
+
+        <div class="float-card card-one">
+
+            <strong>
+                7+
+            </strong>
+
+            <small>
+                PROJECTS
+            </small>
+
+        </div>
+
+
+        <div class="float-card card-two">
+
+            <strong>
+                IT
+            </strong>
+
+            <small>
+                ENGINEERING
+            </small>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section id="about">
+
+    <div class="section-title reveal">
+
+        <small>
+            01 / ABOUT
+        </small>
+
+        <h2>
+            About Me
+        </h2>
+
+    </div>
+
+
+    <div class="about-grid">
+
+
+        <div class="about-text reveal">
+
+            <p>
+
+                I'm Seran, an IT engineering student
+                interested in software development,
+                web technologies, programming and
+                emerging technologies.
+
+            </p>
+
+
+            <br>
+
+
+            <p>
+
+                I enjoy turning ideas into practical
+                projects and continuously improving
+                my development skills.
+
+            </p>
+
+        </div>
+
+
+        <div class="about-boxes reveal">
+
+
+            <div class="info-box">
+
+                <h3>01</h3>
+
+                <p>
+                    Full Stack Development
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <h3>02</h3>
+
+                <p>
+                    Java Development
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <h3>03</h3>
+
+                <p>
+                    Python Development
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <h3>04</h3>
+
+                <p>
+                    AI & Technology
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SKILLS
+===================================================== -->
+
+<section id="skills">
+
+    <div class="section-title reveal">
+
+        <small>
+            02 / SKILLS
+        </small>
+
+        <h2>
+            My Skills
+        </h2>
+
+    </div>
+
+
+    <div class="skills-grid">
+
+
+        <div class="skill reveal">
+
+            <div class="skill-top">
+
+                <span>
+                    HTML / CSS
+                </span>
+
+                <span>
+                    90%
+                </span>
+
+            </div>
+
+
+            <div class="skill-bar">
+
+                <div
+                    class="skill-progress"
+                    data-width="90%">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill reveal">
+
+            <div class="skill-top">
+
+                <span>
+                    JavaScript
+                </span>
+
+                <span>
+                    80%
+                </span>
+
+            </div>
+
+
+            <div class="skill-bar">
+
+                <div
+                    class="skill-progress"
+                    data-width="80%">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill reveal">
+
+            <div class="skill-top">
+
+                <span>
+                    Java
+                </span>
+
+                <span>
+                    85%
+                </span>
+
+            </div>
+
+
+            <div class="skill-bar">
+
+                <div
+                    class="skill-progress"
+                    data-width="85%">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill reveal">
+
+            <div class="skill-top">
+
+                <span>
+                    Python
+                </span>
+
+                <span>
+                    85%
+                </span>
+
+            </div>
+
+
+            <div class="skill-bar">
+
+                <div
+                    class="skill-progress"
+                    data-width="85%">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill reveal">
+
+            <div class="skill-top">
+
+                <span>
+                    MongoDB
+                </span>
+
+                <span>
+                    75%
+                </span>
+
+            </div>
+
+
+            <div class="skill-bar">
+
+                <div
+                    class="skill-progress"
+                    data-width="75%">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill reveal">
+
+            <div class="skill-top">
+
+                <span>
+                    Git / GitHub
+                </span>
+
+                <span>
+                    80%
+                </span>
+
+            </div>
+
+
+            <div class="skill-bar">
+
+                <div
+                    class="skill-progress"
+                    data-width="80%">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TECH STACK
+===================================================== -->
+
+<section>
+
+    <div class="section-title reveal">
+
+        <small>
+            03 / TECHNOLOGIES
+        </small>
+
+        <h2>
+            Tech Stack
+        </h2>
+
+    </div>
+
+
+    <div class="tech-grid">
+
+
+        <div class="tech reveal">
+            <h3>HTML</h3>
+            <p>Web Structure</p>
+        </div>
+
+
+        <div class="tech reveal">
+            <h3>CSS</h3>
+            <p>UI & Design</p>
+        </div>
+
+
+        <div class="tech reveal">
+            <h3>JavaScript</h3>
+            <p>Interaction</p>
+        </div>
+
+
+        <div class="tech reveal">
+            <h3>Java</h3>
+            <p>Application Development</p>
+        </div>
+
+
+        <div class="tech reveal">
+            <h3>Python</h3>
+            <p>Programming & AI</p>
+        </div>
+
+
+        <div class="tech reveal">
+            <h3>MongoDB</h3>
+            <p>Database</p>
+        </div>
+
+
+        <div class="tech reveal">
+            <h3>Node.js</h3>
+            <p>Backend</p>
+        </div>
+
+
+        <div class="tech reveal">
+            <h3>GitHub</h3>
+            <p>Version Control</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
+
+<section id="projects">
+
+    <div class="section-title reveal">
+
+        <small>
+            04 / PROJECTS
+        </small>
+
+        <h2>
+            Featured Projects
+        </h2>
+
+    </div>
+
+
+    <div class="project-grid">
+
+
+        <div class="project reveal">
+
+            <div class="project-number">
+                PROJECT 01
+            </div>
+
+            <h3>
+                AI Smart Bus Tracking
+            </h3>
+
+            <p>
+
+                Smart college bus tracking concept
+                designed for intelligent transportation
+                and monitoring.
+
+            </p>
+
+        </div>
+
+
+        <div class="project reveal">
+
+            <div class="project-number">
+                PROJECT 02
+            </div>
+
+            <h3>
+                E-Commerce Web Application
+            </h3>
+
+            <p>
+
+                Modern responsive shopping platform
+                with product categories and
+                interactive components.
+
+            </p>
+
+        </div>
+
+
+        <div class="project reveal">
+
+            <div class="project-number">
+                PROJECT 03
+            </div>
+
+            <h3>
+                Leave Management System
+            </h3>
+
+            <p>
+
+                Web application for applying,
+                managing and tracking leave requests.
+
+            </p>
+
+        </div>
+
+
+        <div class="project reveal">
+
+            <div class="project-number">
+                PROJECT 04
+            </div>
+
+            <h3>
+                Project Management Dashboard
+            </h3>
+
+            <p>
+
+                Dashboard for creating tasks and
+                managing Pending, InProgress and
+                Completed statuses.
+
+            </p>
+
+        </div>
+
+
+        <div class="project reveal">
+
+            <div class="project-number">
+                PROJECT 05
+            </div>
+
+            <h3>
+                Online Survey Application
+            </h3>
+
+            <p>
+
+                Interactive survey application with
+                random questions and response collection.
+
+            </p>
+
+        </div>
+
+
+        <div class="project reveal">
+
+            <div class="project-number">
+                PROJECT 06
+            </div>
+
+            <h3>
+                AI Expense Tracker
+            </h3>
+
+            <p>
+
+                Modern concept for tracking and
+                organizing expense information.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section>
+
+    <div class="section-title reveal">
+
+        <small>
+            05 / SERVICES
+        </small>
+
+        <h2>
+            What I Build
+        </h2>
+
+    </div>
+
+
+    <div class="service-grid">
+
+
+        <div class="service reveal">
+
+            <div class="service-icon">
+                ◈
+            </div>
+
+            <h3>
+                Web Development
+            </h3>
+
+            <p>
+
+                Responsive and modern websites
+                focused on clean design and usability.
+
+            </p>
+
+        </div>
+
+
+        <div class="service reveal">
+
+            <div class="service-icon">
+                ◉
+            </div>
+
+            <h3>
+                Full Stack Development
+            </h3>
+
+            <p>
+
+                Frontend, backend and database
+                integration for complete applications.
+
+            </p>
+
+        </div>
+
+
+        <div class="service reveal">
+
+            <div class="service-icon">
+                ◆
+            </div>
+
+            <h3>
+                Software Projects
+            </h3>
+
+            <p>
+
+                Practical software solutions using
+                Java, Python and modern technologies.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     EDUCATION
+===================================================== -->
+
+<section id="education">
+
+    <div class="section-title reveal">
+
+        <small>
+            06 / EDUCATION
+        </small>
+
+        <h2>
+            Education
+        </h2>
+
+    </div>
+
+
+    <div class="education">
+
+
+        <div class="edu-item reveal">
+
+            <div class="edu-year">
+                CURRENT
+            </div>
+
+            <h3>
+                B.Tech Information Technology
+            </h3>
+
+            <p>
+                Information Technology Engineering Student
+            </p>
+
+        </div>
+
+
+        <div class="edu-item reveal">
+
+            <div class="edu-year">
+                DEVELOPMENT
+            </div>
+
+            <h3>
+                Full Stack Development
+            </h3>
+
+            <p>
+
+                Continuously learning frontend,
+                backend and database technologies.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section id="contact">
+
+    <div class="contact-box reveal">
+
+        <h2>
+            Let's Build Something.
+        </h2>
+
+        <p>
+
+            Have an idea, project or opportunity?
+            Let's connect and create something meaningful.
+
+        </p>
+
+
+        <div class="contact-links">
+
+            <a href="mailto:yourmail@example.com">
+                EMAIL
+            </a>
+
+            <a href="#" target="_blank">
+                GITHUB
+            </a>
+
+            <a href="#" target="_blank">
+                LINKEDIN
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    © 2026 SERAN —
+    IT ENGINEERING & DEVELOPMENT
+
+</footer>
+
+
+<script>
+
+/* =========================
+   ENTER PORTFOLIO
+========================= */
+
+function enterSite(){
+
+    const entry =
+        document.getElementById("entry");
+
+    entry.classList.add("hide");
+
+    document.body.style.overflow="auto";
+
+    setTimeout(function(){
+
+        entry.remove();
+
+    },1200);
+
+}
+
+
+/* =========================
+   TYPING EFFECT
+========================= */
+
+const words = [
+
+    "Full Stack Developer",
+    "Java Developer",
+    "Python Developer",
+    "IT Engineering Student",
+    "AI Enthusiast"
+
+];
+
+let wordIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+const typing =
+    document.getElementById("typing");
+
+
+function typeEffect(){
+
+    const word =
+        words[wordIndex];
+
+
+    if(!deleting){
+
+        typing.textContent =
+            word.substring(
+                0,
+                charIndex++
+            );
+
+
+        if(charIndex > word.length){
+
+            deleting = true;
+
+            setTimeout(
+                typeEffect,
+                1200
+            );
+
+            return;
+        }
+
+    }
+
+    else{
+
+        typing.textContent =
+            word.substring(
+                0,
+                charIndex--
+            );
+
+
+        if(charIndex < 0){
+
+            deleting = false;
+
+            wordIndex =
+                (wordIndex + 1)
+                % words.length;
+
+            charIndex = 0;
+        }
+
+    }
+
+
+    setTimeout(
+        typeEffect,
+        deleting ? 45 : 80
+    );
+
+}
+
+typeEffect();
+
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const observer =
+    new IntersectionObserver(
+        function(entries){
+
+            entries.forEach(function(entry){
+
+                if(entry.isIntersecting){
+
+                    entry.target
+                        .classList
+                        .add("active");
+
+
+                    const progress =
+                        entry.target
+                        .querySelector(
+                            ".skill-progress"
+                        );
+
+
+                    if(progress){
+
+                        progress.style.width =
+                            progress.dataset.width;
+
+                    }
+
+                }
+
+            });
+
+        },
+        {
+            threshold:.15
+        }
+    );
+
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(function(item){
+
+        observer.observe(item);
+
+    });
+
+
+/* =========================
+   ENTER KEY
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+
+            const entry =
+                document.getElementById("entry");
+
+            if(entry){
+
+                enterSite();
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================
+   INITIAL LOCK
+========================= */
+
+document.body.style.overflow="hidden";
+
+</script>
+
+</body>
+</html>
